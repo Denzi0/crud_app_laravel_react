@@ -29,11 +29,17 @@
                     <div class="mt-4">
                         <form action="{{ url('/todos') }}" method="POST" class="">
                             @csrf
-                            <select id="countries" name="priority" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                            
-                            </select>
+                            <div class="flex mb-3">
+                                <div class="flex items-center mr-4">
+                                    <input id="inline-radio"  value="1" type="radio" value="" name="priority" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="inline-radio" class="ml-2 text-sm font-medium">Normal</label>
+                                </div>
+                                <div class="flex items-center mr-4">
+                                    <input id="inline-2-radio"  value="2" type="radio" value=""name="priority" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="inline-2-radio" class="ml-2 text-sm font-medium ">Urgent</label>
+                                </div>
+                            </div>
+                        
                             <input
                                 name="task"
                                 class="w-full py-2 px-2 border-2 border-gray-500 text-black"
@@ -52,7 +58,7 @@
                         <ul class="list-group">
                    @foreach($todos as $todo)
                             <li class="p-2 rounded-lg" >
-                                <div class="flex align-middle flex-row justify-between   border-l-4 {{ $todo->priority == "1" ? "border-red-500" : "border-blue-400" }}">
+                                <div class="flex align-middle flex-row justify-between   border-l-4 {{ $todo->priority == "1" ?  "border-blue-400" :"border-red-500" }}">
                                     <div class="p-2">
                                         <input type="checkbox" class="h-6 w-6 " value="true" />
                                     </div>
@@ -64,7 +70,7 @@
                                         <form action="{{ url('todos/'.$todo->id) }}" method="POST" style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Danger</button>
+                                            <button type="submit" class="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Delete</button>
                                         </form>
                                      
                                     </div>
