@@ -22,4 +22,6 @@ Route::delete('/todos/{id}', [TodoController::class, 'destroy'])->name('id.destr
 Route::delete('/removeTodo', [TodoController::class, 'destroyAll']);
 
 Route::get('/todos/edit/{id}', [TodoController::class, 'edit']);
-// Route::resource('/todos/{id}'    , [TodoController::class, 'destroy']);
+Route::get('/todos/update/{id}', [TodoController::class, 'update']);
+
+

@@ -11,6 +11,21 @@
             <div class="shadow-lg p-10 w-1/3 mx-auto">
                 <div class="text-center">
                     <h1 class="text-3xl font-bold mb-10">ToDo App</h1>
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                   
                     <div class="mt-4">
                         <form action="{{ url('/todos') }}" method="POST" class="">
                             @csrf
@@ -20,7 +35,7 @@
                             
                             </select>
                             <input
-                            name="task"
+                                name="task"
                                 class="w-full py-2 px-2 border-2 border-gray-500 text-black"
                                 type="text" placeholder="Enter your task here" 
                             />
@@ -33,21 +48,7 @@
                     </div>        
                 </div>
                 <div class="mt-8">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                       
+                   
                         <ul class="list-group">
                    @foreach($todos as $todo)
                             <li class="p-2 rounded-lg" >
@@ -59,13 +60,7 @@
                                         <p class="text-lg text-black">{{ $todo->task }}</p>
                                     </div>
                                     <div class="flex gap-2">
-                                        {{-- <form action="{{ url('todos/edit'.$todo->id) }}" method="GET" style="display: inline-block;"> --}}
-                                            {{-- @csrf
-                                            @method('PUT') --}}
-
                                             <a name="edit" name="edit" href="{{ url('todos/edit/'.$todo->id) }}" class="inline-block px-6 py-2.5 bg-blue-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">Edit</a>
-                                                                             
-                                        {{-- </form> --}}
                                         <form action="{{ url('todos/'.$todo->id) }}" method="POST" style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')
